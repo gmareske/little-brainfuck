@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MEM_MAX 30000 // classic brainfuck number of memory cells
 
@@ -56,7 +55,11 @@ void bf_eval(char *buf) {
   }
 }
 int main(int argc, char **argv) {
-  char *helloworld = ">>>>--<-<<+[+[<+>--->->->-<<<]>]<<--.<++++++.<<-..<<.<+.>>.>>.<<<.+++.>>.>>-.<<<+.";
-  bf_eval(helloworld);
+  if (argc > 1) {
+    bf_eval(argv[1]);
+  } else {
+    char *helloworld = ">>>>--<-<<+[+[<+>--->->->-<<<]>]<<--.<++++++.<<-..<<.<+.>>.>>.<<<.+++.>>.>>-.<<<+.";
+    bf_eval(helloworld);
+  }
   return 0;
 }
