@@ -54,6 +54,7 @@ void bf_eval(char *buf) {
     pos++;
   }
 }
+
 int main(int argc, char **argv) {
   if (argc > 1) {
     bf_eval(argv[1]);

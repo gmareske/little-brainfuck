@@ -1,8 +1,8 @@
 CC= gcc
 CFLAGS = -std=c11 -Wall -Wextra -pedantic
 
-grisp: main.c
-	$(CC) $(CFLAGS) main.c -o gbf
+lbf: main.c
+	$(CC) $(CFLAGS) main.c -o lbf
 
 .PHONY: clean
 
