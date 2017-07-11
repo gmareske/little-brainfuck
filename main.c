@@ -25,7 +25,7 @@ void bf_eval(char *buf) {
       ptr++;
       break;
     case '<':
-pp      ptr--;
+      ptr--;
       break;
     case '[':
       break; // continue
