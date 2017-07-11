@@ -6,34 +6,48 @@
 // pre-condition: buf is a null-terminated string
 //   representing a brainfuck program
 void bf_eval(char *buf) {
-  int pos = 0;
-  unsigned char mem[MEM_MAX] = {0};
-  int mempos = 0;
+  int pos = 0; // iterating through string buffer
+  unsigned char mem[MEM_MAX] = {0}; // memory
+  unsigned char *ptr = mem; // pointer to current mem cell
   unsigned char inc; // used for user input
+
+  int loop; // used for nested loops
+  int c; // current character, used for looping backwards
   while (buf[pos] != '\0') {
     switch(buf[pos]) {
     case '+':
-      mem[mempos]++;
+      (*ptr)++;
       break;
     case '-':
-      mem[mempos]--;
+      (*ptr)--;
       break;
     case '>':
-      mempos++;
+      ptr++;
       break;
     case '<':
-      mempos--;
+      ptr--;
       break;
     case '[':
-      break;
+      break; // continue
     case ']':
+      if (*ptr) { // value at ptr is nonzero
+	loop = 1;
+	while (loop > 0) {
+	  c = buf[--pos];
+	  if (c == '[') {
+	    loop--;
+	  } else if (c == ']') {
+	    loop++;
+	  }
+	}
+      }
       break;
     case '.':
-      printf("%c", mem[mempos]);
+      printf("%c", *ptr);
       break;
     case ',':
       scanf(" %c", &inc);
-      mem[mempos] = inc;
+      *ptr = inc;
       break;
     default:
       printf("unknown token '%c' at position %i\n", buf[pos], pos);
@@ -42,6 +56,7 @@ void bf_eval(char *buf) {
   }
 }
 int main(int argc, char **argv) {
-  char *helloworld = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
+  char *helloworld = ">>>>--<-<<+[+[<+>--->->->-<<<]>]<<--.<++++++.<<-..<<.<+.>>.>>.<<<.+++.>>.>>-.<<<+.";
   bf_eval(helloworld);
+  return 0;
 }
