@@ -7,14 +7,10 @@
 //   representing a brainfuck program
 void bf_eval(char *buf) {
   int pos = 0;
-  unsigned char mem[MEM_MAX];
-  for (int i = 0; i < MEM_MAX; i++) {
-    mem[i] = 0; // initialize all memory cells to 0 to start
-  }
+  unsigned char mem[MEM_MAX] = {0};
   int mempos = 0;
   unsigned char inc; // used for user input
   while (buf[pos] != '\0') {
-
     switch(buf[pos]) {
     case '+':
       mem[mempos]++;
@@ -42,7 +38,6 @@ void bf_eval(char *buf) {
     default:
       printf("unknown token '%c' at position %i\n", buf[pos], pos);
     }
-
     pos++;
   }
 }
