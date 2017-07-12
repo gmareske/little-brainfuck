@@ -57,7 +57,20 @@ void bf_eval(char *buf) {
     }
     pos++;
   }
-  free(tape);
+  //free(tape);
+}
+
+char *read_file(char *filename) {
+  FILE *f = fopen(filename, "r");
+  char *buf = malloc(sizeof(char) * 2048);
+  int char_count = 0; // characters read
+  int c;
+  while ( (c = fgetc(f)) != EOF ) {
+    buf[char_count] = c;
+    char_count++;
+  }
+  buf[char_count] = '\0';
+  return buf;
 }
 
 int main(int argc, char **argv) {
@@ -70,6 +83,9 @@ int main(int argc, char **argv) {
     /* bf_eval(helloworld); */
     /* bf_eval(hw); */
     /* bf_eval(hello); */
+    char *buf = read_file("bf/hello.bf");
+    bf_eval(buf);
+    free(buf);
   }
   return 0;
 }
