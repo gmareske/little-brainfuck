@@ -2,6 +2,7 @@
 
 #define MEM_MAX 30000 // classic brainfuck number of memory cells
 
+
 // pre-condition: buf is a null-terminated string
 //   representing a brainfuck program
 void bf_eval(char *buf) {
@@ -11,27 +12,27 @@ void bf_eval(char *buf) {
   unsigned char inc; // used for user input
 
   int loop; // used for nested loops
-  int c; // current character, used for looping backwards
+  unsigned char c; // current character, used for looping backwards
   while (buf[pos] != '\0') {
     switch(buf[pos]) {
     case '+':
-      (*ptr)++;
+      ++*ptr;
       break;
     case '-':
-      (*ptr)--;
+      --*ptr;
       break;
     case '>':
-      ptr++;
+      ++ptr;
       break;
     case '<':
-      ptr--;
+      --ptr;
       break;
     case '[':
       break; // continue
     case ']':
       if (*ptr) { // value at ptr is nonzero
 	loop = 1;
-	while (loop > 0) {
+	while (loop) {
 	  c = buf[--pos];
 	  if (c == '[') {
 	    loop--;
@@ -59,7 +60,7 @@ int main(int argc, char **argv) {
   if (argc > 1) {
     bf_eval(argv[1]);
   } else {
-    char *helloworld = ">>>>--<-<<+[+[<+>--->->->-<<<]>]<<--.<++++++.<<-..<<.<+.>>.>>.<<<.+++.>>.>>-.<<<+.";
+    char *helloworld = ">++++++++[-<+++++++++>]<.>[][<-]>+>-[+]++>++>+++[>[->+++<<+++>]<<]>-----.>->+++..+++.>-.<<+[>[+>+]>>]<--------------.>>.+++.------.--------.>+.>+.";
     bf_eval(helloworld);
   }
   return 0;
