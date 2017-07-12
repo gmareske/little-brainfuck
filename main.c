@@ -7,7 +7,6 @@
 // pre-condition: buf is a null-terminated string
 //   representing a brainfuck program
 void bf_eval(char *buf) {
-
   int pos = 0; // iterating through string buffer
   // TODO: is there a better way to allocate memory?
   unsigned char *tape = calloc(sizeof(unsigned char) * MEM_MAX, 1); // memory all 0'd
@@ -16,18 +15,10 @@ void bf_eval(char *buf) {
 
   while (buf[pos] != '\0') {
     switch(buf[pos]) {
-    case '+':
-      ++*ptr;
-      break;
-    case '-':
-      --*ptr;
-      break;
-    case '>':
-      ++ptr;
-      break;
-    case '<':
-      --ptr;
-      break;
+    case '+': ++*ptr; break;
+    case '-': --*ptr; break;
+    case '>': ++ptr;  break;
+    case '<': --ptr;  break;
     case '[':
       if (!*ptr) { // value at ptr is zero
 	int loop = 1;
