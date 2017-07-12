@@ -106,7 +106,7 @@ void bf_eval(char *buf) {
       *ptr = inc;
       break;
     default:
-      printf("unknown token '%c' at position %i\n", buf[pos], pos);
+      printf("unknown token '%c' at position %i\n", *ptr, pos);
     }
     pos++;
   }
