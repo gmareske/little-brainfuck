@@ -9,16 +9,16 @@
 void bf_eval(char *buf) {
   int pos = 0; // iterating through string buffer
   // TODO: is there a better way to allocate memory?
-  unsigned char *tape = calloc(sizeof(unsigned char) * MEM_MAX, 1); // memory all 0'd
+  unsigned char tape[MEM_MAX];
   unsigned char *ptr = &tape[0]; // pointer to current mem cell
   unsigned char inc; // used for user input
 
   while (buf[pos] != '\0') {
     switch(buf[pos]) {
-    case '+': ++*ptr; break;
-    case '-': --*ptr; break;
-    case '>': ++ptr;  break;
-    case '<': --ptr;  break;
+    case '+': ++*ptr; break; // increment the value in memory
+    case '-': --*ptr; break; // decrement the value in memory
+    case '>': ++ptr;  break; // move pointer forward
+    case '<': --ptr;  break; // move pointer backward
     case '[':
       if (!*ptr) { // value at ptr is zero
 	int loop = 1;
@@ -57,7 +57,6 @@ void bf_eval(char *buf) {
     }
     pos++;
   }
-  //free(tape);
 }
 
 char *read_file(char *filename) {
@@ -84,6 +83,7 @@ int main(int argc, char **argv) {
     /* bf_eval(hw); */
     /* bf_eval(hello); */
     char *buf = read_file("bf/hello.bf");
+    printf("%s\n", buf);
     bf_eval(buf);
     free(buf);
   }
