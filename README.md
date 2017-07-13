@@ -24,18 +24,25 @@ make
 
 ### Usage
 
-Currently, little brainfuck supports evaluating programs given
-via command line arguments.
+Little brainfuck supports taking in a brainfuck program as a
+command line argument, or the name of a file that contains a
+brainfuck program.
+
+Examples:
 
 ```
 ./lbf "+[>,.<]"
 ```
 
-The above code will print out all input given to it.
+```
+./lbf bf/hello.bf
+```
+
+Executes the brainfuck program in ```bf/hello.bf```.
 
 ## Authors
 
-**[Griffin Mareske](mailto:gmareske@gmail.com)** - (gmareske@gmail.com)
+**[Griffin Mareske]** - (gmareske@gmail.com)
 
 ## License
 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define MEM_MAX 30000 // classic brainfuck number of memory cells
 
@@ -74,7 +75,14 @@ char *read_file(char *filename) {
 
 int main(int argc, char **argv) {
   if (argc > 1) {
-    bf_eval(argv[1]);
+    if (access(argv[1], F_OK) != -1) {
+      char *buf = read_file(argv[1]);
+      bf_eval(buf);
+      free(buf);
+    } else {
+      bf_eval(argv[1]);
+    }
+
   } else {
     /* char *helloworld = ">++++++++[-<+++++++++>]<.>[][<-]>+>-[+]++>++>+++[>[->+++<<+++>]<<]>-----.>->+++..+++.>-.<<+[>[+>+]>>]<--------------.>>.+++.------.--------.>+.>+."; */
     /* char *hw = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>."; */
@@ -82,10 +90,6 @@ int main(int argc, char **argv) {
     /* bf_eval(helloworld); */
     /* bf_eval(hw); */
     /* bf_eval(hello); */
-    char *buf = read_file("bf/hello.bf");
-    printf("%s\n", buf);
-    bf_eval(buf);
-    free(buf);
   }
   return 0;
 }
