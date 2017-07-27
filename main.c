@@ -73,6 +73,12 @@ char *read_file(char *filename) {
   return buf;
 }
 
+void print_help() {
+  printf("Usage:\n");
+  printf("lbf <filename> | lbf \"brainfuckprogram\"\n");
+  printf("Where filename is a path to a file containing a brainfuck program");
+}
+
 int main(int argc, char **argv) {
   if (argc > 1) {
     if (access(argv[1], F_OK) != -1) {
@@ -84,12 +90,7 @@ int main(int argc, char **argv) {
     }
 
   } else {
-    /* char *helloworld = ">++++++++[-<+++++++++>]<.>[][<-]>+>-[+]++>++>+++[>[->+++<<+++>]<<]>-----.>->+++..+++.>-.<<+[>[+>+]>>]<--------------.>>.+++.------.--------.>+.>+."; */
-    /* char *hw = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>."; */
-    /* char *hello = "[]>+>+>++>++<[>[->++++<<+++>]<<]>----.>->+.+++++++..+++.<+[][]>>.<<<+++++++++++++++.>>.+++.------.--------.>+.+>++.<<<[]"; */
-    /* bf_eval(helloworld); */
-    /* bf_eval(hw); */
-    /* bf_eval(hello); */
+    print_help();
   }
   return 0;
 }
