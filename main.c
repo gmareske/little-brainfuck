@@ -4,7 +4,6 @@
 
 #define MEM_MAX 30000 // classic brainfuck number of memory cells
 
-
 // pre-condition: buf is a null-terminated string
 //   representing a brainfuck program
 void bf_eval(char *buf) {
@@ -62,12 +61,17 @@ void bf_eval(char *buf) {
 
 char *read_file(char *filename) {
   FILE *f = fopen(filename, "r");
-  char *buf = malloc(sizeof(char) * 2048);
+  int buf_size = 2048;
+  char *buf = malloc(sizeof(char) * buf_size);
   int char_count = 0; // characters read
   int c;
   while ( (c = fgetc(f)) != EOF ) {
     buf[char_count] = c;
     char_count++;
+    if (char_count >= buf_size) {
+      buf_size *= 2;
+      buf = realloc(buf, sizeof(char) * buf_size);
+    }
   }
   buf[char_count] = '\0';
   return buf;
